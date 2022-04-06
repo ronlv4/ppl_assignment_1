@@ -1,6 +1,4 @@
 import * as R from "ramda";
-import {concat, identity, is, match, reduce, Reduced} from "ramda";
-import {returnSquaredIfFoundEven_v2} from "../part3/find";
 
 const stringToArray = R.split("");
 
@@ -18,7 +16,7 @@ export const isPaired: (s: string) => boolean = function (s: string) {
         "[": 0,
         "{": 0
     }
-    for (const c of stringToArray(s)) { // change for loop to map
+    for (const c of stringToArray(s)) {
         if (c == ')') {
             if (parenthesesCount["("]-- == 0)
                 return false
@@ -41,5 +39,9 @@ export interface WordTree {
 }
 
 export const treeToSentence: (t: WordTree) => string =
-    t => t === undefined ? ""
-        : t.root + t.children.reduce((acc,cur)=>acc+" "+treeToSentence(cur),"");
+    t => {
+        if (t === undefined)
+            return "";
+        return t.root + t.children.reduce((acc, cur) => acc + " " + treeToSentence(cur), "");
+    }
+
