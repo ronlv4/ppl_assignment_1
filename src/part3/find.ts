@@ -10,7 +10,7 @@ const findOrThrow = <T>(pred: (x: T) => boolean, a: T[]): T => {
 
 export const findResult = <T> (pred: (x: T) => boolean, a: T[]): Result<T> => {
     try{
-        let result: T = findOrThrow(pred, a)
+        const result: T = findOrThrow(pred, a)
         return makeOk(result)
     }catch (e){
         return makeFailure("no such element exist")
