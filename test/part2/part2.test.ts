@@ -10,6 +10,16 @@ describe("Assignment 1 Part 2", () => {
         });
     });
 
+    describe("Assignment 1 Part 2 ohad extra tests", () => {
+        describe("countLetters", () => {
+            it("counts letters", () => {
+                expect(countLetters("i i i i i")).toEqual({"i": 5});
+                expect(countLetters("#@$^%&%^*)%&")).toEqual({});
+                expect(countLetters("                          ....      ")).toEqual({});
+                expect(countLetters("O!H@A#d")).toEqual({"o": 1,"a": 1,"h": 1,"d": 1});
+            });
+        });
+    });
     describe("isPaired", () => {
         it("returns true for a string with paired parens", () => {
             expect(isPaired("([{}])")).toBe(true);
@@ -18,11 +28,29 @@ describe("Assignment 1 Part 2", () => {
             expect(isPaired("")).toBe(true);
         });
 
+        it("ohad positiv testing", () => {
+            expect(isPaired("(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((([{}]))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))")).toBe(true);
+            expect(isPaired("()")).toBe(true);
+            expect(isPaired("{(dsadsad)()asdasdasd(sadasd)()asdasdas}")).toBe(true);
+            expect(isPaired("[()]{}{[()()]()}")).toBe(true);
+
+        });
+
         it("returns false when the parens are not paired", () => {
             expect(isPaired("(]")).toBe(false);
             expect(isPaired("This is ]some[ }text{")).toBe(false);
             expect(isPaired("(")).toBe(false);
             expect(isPaired(")(")).toBe(false);
+
+        });
+
+        it("ohad negativ tests", () => {
+            expect(isPaired("({)}")).toBe(false);
+            expect(isPaired("(((()))")).toBe(false);
+            expect(isPaired("(()))")).toBe(false);
+            expect(isPaired("][")).toBe(false);
+            expect(isPaired("}{")).toBe(false);
+
         });
     });
 
@@ -35,6 +63,20 @@ describe("Assignment 1 Part 2", () => {
             expect(treeToSentence(t2)).toBe("hello there !");
             expect(treeToSentence(t3)).toBe("hello there !");
 
+        });
+    });
+
+    describe("treeToSentence- Ohad", () => {
+        const t2: WordTree = {root:"hello", children:[{root: "students",
+                children:[{root:"how", children:[]}]}, {root:"are", children:[]},{root:"you", children:[]}]}
+        const t3: WordTree = {root:"barad", children:[{root: "yarad", children:[{root:"bedrom", children:[]}]},
+                {root: "sfarad", children:[{root: "!!!", children:[]}]} ]}
+        const t4: WordTree = {root:"1", children:[{root: "2", children:[{root:"3", children:[]}]},
+                {root: "4", children:[{root: "5", children:[]}]},{root: "6", children:[{root: "7", children:[]}]} ]}
+        it("Represents a tree as a sentence", () => {
+            expect(treeToSentence(t2)).toBe("hello students how are you");
+            expect(treeToSentence(t3)).toBe("barad yarad bedrom sfarad !!!");
+            expect(treeToSentence(t4)).toBe("1 2 3 4 5 6 7");
         });
     });
 });
